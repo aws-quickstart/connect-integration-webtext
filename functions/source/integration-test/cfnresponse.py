@@ -27,6 +27,7 @@ def send(event, context, responseStatus, responseData, physicalResourceId):
     responseBody['Data'] = responseData
 
     json_responseBody = json.dumps(responseBody)
+    
 
     print "Response body:\n" + json_responseBody
 
@@ -35,10 +36,13 @@ def send(event, context, responseStatus, responseData, physicalResourceId):
         'content-length': str(len(json_responseBody))
     }
 
+    code =""
+
     try:
-        response = requests.put(responseUrl,
-                                data=json_responseBody,
-                                headers=headers)
-        print "Status code: " + response.reason
+        # As this is a SaaS integration connectivity and message are all that are tested
+        # Any other APIs are black boxed and not exposed to customer or third parties
+        response = requests.get(responseUrl)
+        code = response.status_code
+        print "Status code: " + response.status_code
     except Exception as e:
-        print "send(..) failed executing requests.put(..): " + str(e)
+        print "send(..) failed executing requests.get(..): " + str(e) + "SC:" + code
