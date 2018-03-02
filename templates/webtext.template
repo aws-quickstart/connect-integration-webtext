@@ -11,12 +11,34 @@ Metadata:
     ParameterLabels:
       IntegrationEndpoint:
         default: Integration Endpoint
+    - Label:
+        default: AWS Quick Start Configuration
+      Parameters:
+      - QSS3BucketName
+      - QSS3KeyPrefix
+    ParameterLabels:
+      QSS3BucketName:
+        default: Quick Start S3 Bucket Name
+      QSS3KeyPrefix:
+        default: Quick Start S3 Key Prefix
 Parameters:
   IntegrationEndpoint:
     AllowedPattern: ^https:\/\/[a-zA-Z0-9-\/\.]+$
     ConstraintDescription: Endpoint must be a valid https URL as provided.
     Default: https://appgw.webtext.com/awsconnect/agent
     Description: The endpoint of the integration. 
+    Type: String
+  QSS3BucketName:
+    AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-][0-9a-zA-Z])$
+    ConstraintDescription: Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen(-)
+    Default: quickstart-reference
+    Description: S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)
+    Type: String
+  QSS3KeyPrefix:
+    AllowedPattern: ^[0-9a-zA-Z-/]*$
+    ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)
+    Default: connect/integration/webtext/latest/
+    Description: S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)
     Type: String
 Rules:
   RegionSupport:
