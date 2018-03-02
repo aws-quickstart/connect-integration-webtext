@@ -1,11 +1,11 @@
 ---
-AWSTemplateFormatVersion: '2017-10-24'
-Description: WEBTEXT Amazon Connect CAM Integration Quick Start
+AWSTemplateFormatVersion: '2010-09-09'
+Description: WEBTEXT CAM Integration for Amazon Connect Quick Start (qs-1o7fbe6sg)
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label:
-        default: WEBTEXT Amazon Connect CAM
+        default: Amazon Connect WEBTEXT CAM integration
       Parameters:
       - IntegrationEndpoint
     ParameterLabels:
@@ -32,13 +32,13 @@ Rules:
         - Fn::Equals:
           - Ref: IntegrationEndpoint
           - https://appgw.webtext.com/awsconnect/agent
-      AssertDescription: Amazon Connect Example Integration parameters URL must be default
+      AssertDescription: WEBTEXT integration parameters URL must be default
 Resources:
   IntegrationTestFunctionExecutionRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
-        Version: '2017-10-24'
+        Version: '2012-10-17'
         Statement:
           Effect: Allow
           Principal:
@@ -69,7 +69,7 @@ Resources:
     Properties:
       Handler: webtextChat.lambda_handler
       Runtime: python3.6
-      Description: Webtext integration function
+      Description: WEBTEXT CAM integration function
       MemorySize: 128
       Timeout: 15
       Role:
@@ -79,9 +79,9 @@ Resources:
           IntegrationEndpoint:
             Ref: IntegrationEndpoint
       Code:
-        S3Bucket: webtextconnect.com
+        S3Bucket: quickstart-reference
         S3Key:
-          Fn::Sub: integrations/integration.zip
+          Fn::Sub: connect/integration/webtext/latest/functions/packages/integration/lambda.zip
   IntegrationFunctionPermission:
     Type: AWS::Lambda::Permission
     Properties:
