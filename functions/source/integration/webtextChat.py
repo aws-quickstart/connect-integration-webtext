@@ -62,4 +62,4 @@ def lambda_handler(event, context):
     # print(r2.json())
     return ev  # Echo back the first key value
 
-    raise Exception('Something went wrong')
+    raise Exception('Woops, Something went wrong. Consider uncommenting debug statements.')
