@@ -9,25 +9,38 @@ Metadata:
       Parameters:
       - ApiUsr
       - ApiPass
+      - IntegrationEndpoint
     ParameterLabels:
-      ApiUsr:
+      ApiUser:
         default: WEBTEXT api_usr
       ApiPass:
         default: WEBTEXT api_pass
+      IntegrationEndpoint:
+        default: Integration Endpoint
 Parameters:
   ApiUser:
+    AllowedPattern: ^[0-9a-zA-Z]*$
+    ConstraintDescription: Password does not meet format requirements
     Description: Provide the api_usr as supplied by WEBTEXT
     Type: String
-  ApiPwd:
+    MinLength: 6
+    MaxLength: 64
+  ApiPass:
     AllowedPattern: ^[0-9a-zA-Z]*$
     ConstraintDescription: Password does not meet complexity requirements
     Description: Password must contain 8 to 64 printable ASCII characters excluding
       /, ", ', \, and @. It must contain 1 uppercase letter, 1 lowercase letter, and
       1 number.
     Type: String
-    MinLength: 8
+    MinLength: 6
     MaxLength: 64
     NoEcho: true
+  IntegrationEndpoint:
+    AllowedPattern: ^https:\/\/[a-zA-Z0-9-\/\.]+$
+    ConstraintDescription: Endpoint must be a valid https URL as provided.
+    Default: https://appgw.webtext.com/awsconnect/agent
+    Description: The endpoint of the integration. 
+    Type: String
 Rules:
   RegionSupport:
     Assertions:

@@ -1,5 +1,6 @@
 import json
 import requests
+import os
 
 print('Loading function')
 
@@ -18,8 +19,10 @@ def lambda_handler(event, context):
     urlz = "http://connect.webtext.us.com/v2/enable-chat"
     headers = {'user-agent': 'aws_connect_GJ/0.0.1'}
     num = event['Details']['Parameters']['phone']
-    api_usr = event['Details']['Parameters']['api_usr']
-    api_pass = event['Details']['Parameters']['api_pass']
+    
+    # Take input parameters from environment variables
+    api_usr = os.environ['ApiUser']
+    api_pass = os.environ['ApiPass']
     txt = event['Details']['Parameters']['txt']
     cc_number = event['Details']['Parameters']['cc_number']
 
