@@ -5,41 +5,29 @@ Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label:
-        default: Amazon Connect WEBTEXT CAM integration
+        default: WEBTEXT AWS Quick Start Configuration
       Parameters:
-      - IntegrationEndpoint
+      - ApiUsr
+      - ApiPass
     ParameterLabels:
-      IntegrationEndpoint:
-        default: Integration Endpoint
-    - Label:
-        default: AWS Quick Start Configuration
-      Parameters:
-      - QSS3BucketName
-      - QSS3KeyPrefix
-    ParameterLabels:
-      QSS3BucketName:
-        default: Quick Start S3 Bucket Name
-      QSS3KeyPrefix:
-        default: Quick Start S3 Key Prefix
+      ApiUsr:
+        default: WEBTEXT api_usr
+      ApiPass:
+        default: WEBTEXT api_pass
 Parameters:
-  IntegrationEndpoint:
-    AllowedPattern: ^https:\/\/[a-zA-Z0-9-\/\.]+$
-    ConstraintDescription: Endpoint must be a valid https URL as provided.
-    Default: https://appgw.webtext.com/awsconnect/agent
-    Description: The endpoint of the integration. 
+  ApiUser:
+    Description: Provide the api_usr as supplied by WEBTEXT
     Type: String
-  QSS3BucketName:
-    AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-][0-9a-zA-Z])$
-    ConstraintDescription: Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen(-)
-    Default: quickstart-reference
-    Description: S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)
+  ApiPwd:
+    AllowedPattern: ^[0-9a-zA-Z]*$
+    ConstraintDescription: Password does not meet complexity requirements
+    Description: Password must contain 8 to 64 printable ASCII characters excluding
+      /, ", ', \, and @. It must contain 1 uppercase letter, 1 lowercase letter, and
+      1 number.
     Type: String
-  QSS3KeyPrefix:
-    AllowedPattern: ^[0-9a-zA-Z-/]*$
-    ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)
-    Default: connect/integration/webtext/latest/
-    Description: S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)
-    Type: String
+    MinLength: 8
+    MaxLength: 64
+    NoEcho: true
 Rules:
   RegionSupport:
     Assertions:
@@ -48,13 +36,6 @@ Rules:
         - Ref: AWS::Region
         - us-east-1
       AssertDescription: Region must be US East (N. Virginia) - us-east-1
-  ParameterDefaults:
-    Assertions:
-    - Assert:
-        - Fn::Equals:
-          - Ref: IntegrationEndpoint
-          - https://appgw.webtext.com/awsconnect/agent
-      AssertDescription: WEBTEXT integration parameters URL must be default
 Resources:
   IntegrationTestFunctionExecutionRole:
     Type: AWS::IAM::Role
