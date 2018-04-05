@@ -5,7 +5,7 @@ Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label:
-        default: WEBTEXT AWS Quick Start Configuration
+        default: WEBTEXT Configuration
       Parameters:
       - ApiUsr
       - ApiPass
@@ -39,7 +39,7 @@ Parameters:
     AllowedPattern: ^https:\/\/[a-zA-Z0-9-\/\.]+$
     ConstraintDescription: Endpoint must be a valid https URL as provided.
     Default: https://appgw.webtext.com/awsconnect/agent
-    Description: The endpoint of the integration. 
+    Description: The endpoint of the integration.
     Type: String
 Rules:
   RegionSupport:
@@ -75,9 +75,9 @@ Resources:
       Runtime: python2.7
       Timeout: 30
       Code:
-        S3Bucket: quickstart-reference
+        S3Bucket: aws-quickstart
         S3Key:
-          Fn::Sub: connect/integration/examples/latest/functions/packages/integration-test/integration-test.zip
+          Fn::Sub: connect-integration-webtext/functions/packages/integration-test/integration-test.zip
   IntegrationTest:
     Type: Custom::IntegrationTest
     Version: '1.0'
@@ -116,9 +116,9 @@ Resources:
           IntegrationEndpoint:
             Ref: IntegrationEndpoint
       Code:
-        S3Bucket: quickstart-reference
+        S3Bucket: aws-quickstart
         S3Key:
-          Fn::Sub: connect/integration/webtext/latest/functions/packages/integration/lambda.zip
+          Fn::Sub: connect-integration-webtext/functions/packages/integration/lambda.zip
   IntegrationFunctionPermission:
     Type: AWS::Lambda::Permission
     Properties:
@@ -134,7 +134,7 @@ Outputs:
     Value:
       Fn::GetAtt: IntegrationFunctionExecutionRole.Arn
   IntegrationFunction:
-    Description: Lambda Function for Amazon Connect Example Integration
+    Description: Lambda Function for Amazon Connect WEBTEXT Integration
     Value:
       Fn::GetAtt: IntegrationFunction.Arn
 ...
