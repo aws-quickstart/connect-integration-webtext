@@ -8,4 +8,4 @@ global:
 tests:
   defaults:
     parameter_input: defaults.json
-    template_file: wtchat.template
+    template_file: webtext.template
