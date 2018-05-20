@@ -76,8 +76,7 @@ Resources:
       Timeout: 30
       Code:
         S3Bucket: aws-quickstart
-        S3Key:
-          Fn::Sub: connect-integration-webtext/functions/packages/integration-test/integration-test.zip
+        S3Key: connect-integration-webtext/functions/packages/integration-test/integration-test.zip
   IntegrationTest:
     Type: Custom::IntegrationTest
     Version: '1.0'
@@ -117,8 +116,7 @@ Resources:
             Ref: IntegrationEndpoint
       Code:
         S3Bucket: aws-quickstart
-        S3Key:
-          Fn::Sub: connect-integration-webtext/functions/packages/integration/lambda.zip
+        S3Key: connect-integration-webtext/functions/packages/integration/lambda.zip
   IntegrationFunctionPermission:
     Type: AWS::Lambda::Permission
     Properties:
@@ -129,10 +127,6 @@ Resources:
       SourceAccount:
         Ref: AWS::AccountId
 Outputs:
-  IntegrationFunctionExecutionRole:
-    Description: Lambda Function Execution Role ARN
-    Value:
-      Fn::GetAtt: IntegrationFunctionExecutionRole.Arn
   IntegrationFunction:
     Description: Lambda Function for Amazon Connect WEBTEXT Integration
     Value:
