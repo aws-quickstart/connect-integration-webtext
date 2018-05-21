@@ -7,7 +7,7 @@ Metadata:
     - Label:
         default: WEBTEXT Configuration
       Parameters:
-      - ApiUsr
+      - ApiUser
       - ApiPass
       - IntegrationEndpoint
     ParameterLabels:
@@ -20,14 +20,18 @@ Metadata:
 Parameters:
   ApiUser:
     AllowedPattern: ^[0-9a-zA-Z]*$
-    ConstraintDescription: Password does not meet format requirements
+    ConstraintDescription: User does not meet format requirements. User should contain
+      8 to 64 printable ASCII characters excluding /, ", ', \, and @. It must contain
+      1 uppercase letter, 1 lowercase letter, and 1 number.
     Description: Provide the api_usr as supplied by WEBTEXT
     Type: String
     MinLength: 6
     MaxLength: 64
   ApiPass:
     AllowedPattern: ^[0-9a-zA-Z]*$
-    ConstraintDescription: Password does not meet complexity requirements
+    ConstraintDescription: Password does not meet complexity requirements. Password
+      must contain 8 to 64 printable ASCII characters excluding /, ", ', \, and @.
+      It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.
     Description: Password must contain 8 to 64 printable ASCII characters excluding
       /, ", ', \, and @. It must contain 1 uppercase letter, 1 lowercase letter, and
       1 number.
