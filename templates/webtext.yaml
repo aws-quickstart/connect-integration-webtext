@@ -80,7 +80,7 @@ Resources:
       Timeout: 30
       Code:
         S3Bucket: aws-quickstart
-        S3Key: connect-integration-webtext/functions/packages/integration-test/integration-test.zip
+        S3Key: connect-integration-webtext/functions/packages/integration-test/lambda.zip
   IntegrationTest:
     Type: Custom::IntegrationTest
     Version: '1.0'
